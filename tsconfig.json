@@ -11,6 +11,14 @@
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
     "sourceMap": true,
+    "paths": {
+      "ngx-cache": [
+        "./dist/ngx-cache"
+      ],
+      "ngx-cache-ttl": [
+        "./dist/ngx-cache-ttl"
+      ]
+    },
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,

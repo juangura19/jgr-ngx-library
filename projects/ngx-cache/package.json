@@ -1,0 +1,17 @@
+{
+  "name": "@juangura19/ngx-cache",
+  "version": "0.0.5",
+  "peerDependencies": {
+    "@angular/common": "^17.0.0",
+    "@angular/core": "^17.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false,
+  "exports": {
+    "./lib/ngx-cache.enum": {
+      "import": "./ngx-cache.enum.ts"
+    }
+  }
+}
