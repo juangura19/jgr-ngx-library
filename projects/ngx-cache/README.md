@@ -43,7 +43,7 @@ export class AppModule { }
 
 ### Cache
 
-almacenamiento por para session storiga y local storage
+almacenamiento para session storage y local storage
 
 | Key | Value  | Description |
 | :-------- | :------- | :------- |
@@ -63,8 +63,8 @@ Si no desea usar hacer uso del interceptor, no es necesario importar el modulo y
 
 | Metodo | input  | descripcion |
 | :-------- | :------- | :------- | 
-| `find` | `key, ttl, type` | permite obtener datos de la cache y valida si los datos estan vigentes en base al ttl enviado  | 
-| `save` | `key, data, type` | permite guardar los datos en cache |
+| `find` | `key, ttl, type` | permite obtener datos de la cache y valida si los datos estan vigentes en base al ttl enviado, el ttl no aplica para el almacenamiento en cookie  | 
+| `save` | `key, data, type, ttl` | permite guardar los datos en cache, el ttl solo es para almacenamiento en cookie |
 | `remove` | `key, type` | permite remover los datos de cache incluido su ttl |
 
 ```javascript
@@ -88,7 +88,7 @@ export class AppComponent {
   }
 
   save = () => {
-    //el tipo de almancenamiento es opcional, por defecto va apuntar al sessionstorage
+    //el tipo de almancenamiento es opcional, por defecto va apuntar al sessionstorage, el ttl solo se envia cuando el almacenamiento es en cookie, por defecto es "0"
     this.cacheService.save('https://example.com/example', {...data...}, NgxCacheEnum.localstorage)
   }
 
