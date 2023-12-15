@@ -16,7 +16,6 @@ export class NgxCacheInterceptor implements HttpInterceptor {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<any> {
-        console.log(req.method)
         if (req.method != "GET") return next.handle(req); 
 
         const url = this.options.find(opt => req.url.search(`${opt.base}${opt.path}`) == 0)
@@ -38,7 +37,7 @@ export class NgxCacheInterceptor implements HttpInterceptor {
             return next.handle(req)
                 .pipe(map((res: any) => {
                     if (res?.body) {
-                        this.ngxCacheService.save(req.url, JSON.stringify(res.body), url.type)
+                        this.ngxCacheService.save(req.url, JSON.stringify(res.body), url.type, url.ttl)
                     }
                     return res
                 }))

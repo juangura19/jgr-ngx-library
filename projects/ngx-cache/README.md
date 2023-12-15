@@ -28,9 +28,10 @@ import { NgxCacheModule, NgxCacheEnum } from '@juangura19/ngx-cache';
   imports: [
     ...,
     NgxCacheModule.forRoot([
-      { base: 'https://example.com', path: "/example", ttl: 3600, type: NgxCacheEnum.sessionstorage},
-      { base: 'https://example.com', path: "/example1", ttl: 360, type: NgxCacheEnum.localstorage },
-      { base: 'https://example.com', path: "/example2", ttl: 60 }
+      { base: 'https://example.com', path: "/example1", ttl: 3600, type: NgxCacheEnum.sessionstorage},
+      { base: 'https://example.com', path: "/example2", ttl: 360, type: NgxCacheEnum.localstorage },
+      { base: 'https://example.com', path: "/example3", ttl: 0, type: NgxCacheEnum.cookie  }
+      { base: 'https://example.com', path: "/example4", ttl: 60 }
     ])
   ],
   providers: [
@@ -42,10 +43,19 @@ export class AppModule { }
 
 ### Cache
 
+almacenamiento por para session storiga y local storage
+
 | Key | Value  | Description |
 | :-------- | :------- | :------- |
 | `https://example.com/example` | `"{...data...}"` | Data almacenada |
 | `https://example.com/example-cas` | `1700201255139` | Fecha de creación en formato `number` |
+
+almacenamiento cookie, si el ttl es 0, el valor se eliminara cuando se cierra el explorador
+
+| Key | Value  | Description |
+| :-------- | :------- | :------- |
+| `https://example.com/example` | `"{...data...}"` | Data almacenada |
+
 
 ### Metodos adicionales
 

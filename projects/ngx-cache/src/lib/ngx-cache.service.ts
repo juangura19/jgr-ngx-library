@@ -9,24 +9,23 @@ export class NgxCacheService {
   constructor() { }
 
   find(key: string, ttl: number, type: NgxCacheEnum = NgxCacheEnum.sessionstorage) {
-    const keycas = key + "-cas"
-    return this.validate(key, keycas, ttl, type) ? this.getCache(key, type) : undefined
+    return this.validate(key, ttl, type) ? this.getCache(key, type) : undefined
   }
 
-  save(key: string, data: string, type: NgxCacheEnum = NgxCacheEnum.sessionstorage) {
-    NgxCacheEnum.set(key, data, type)
-    NgxCacheEnum.set(key + "-cas", new Date().getTime().toString(), type)
+  save(key: string, data: string, type: NgxCacheEnum = NgxCacheEnum.sessionstorage, ttl: number = 0) {
+    NgxCacheEnum.set(key, data, type, ttl)
   }
 
   remove(key: string, type: NgxCacheEnum = NgxCacheEnum.sessionstorage) {
     NgxCacheEnum.remove(key, type)
-    NgxCacheEnum.remove(key + "-cas", type)
   }
 
-  private validate(key: string, keycas: string, ttl: number, type: NgxCacheEnum) {
+  private validate(key: string, ttl: number, type: NgxCacheEnum) {
     let cache = this.getCache(key, type)
 
-    let date = new Date(parseInt(this.getCache(keycas, type)));
+    if (type == NgxCacheEnum.cookie) { return cache ? true : false }
+
+    let date = new Date(parseInt(this.getCache(key + "-cas", type)));
     date.setSeconds(date.getSeconds() + ttl);
     const now = new Date()
 
